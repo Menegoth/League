@@ -24,5 +24,7 @@ if response.status_code == 200:
         matchesData = json.loads(response.content)
 
         print(matchesData["totalGames"])
+elif response.status_code == 401:
+    print("Authentication failed")
 else:
     print("Something went wrong")
