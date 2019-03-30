@@ -2,7 +2,7 @@ import requests
 import json
 import os
 
-user = "Menegoth"
+user = input("What is your account name? ")
 url = "https://na1.api.riotgames.com/lol"
 endpoints = {
   'accountData': f'{url}/summoner/v4/summoners/by-name/{user}'
@@ -25,12 +25,16 @@ if response.status_code == 200:
     if response.status_code == 200:
         matchesData = json.loads(response.content)
 
-        print(matchesData["totalGames"])
+        print(f"You have played {matchesData['totalGames']} games in the last week.")
 
     elif response.status_code == 401:
 
         print("Authentication failed.")
 
 elif response.status_code == 401:
-    
+
     print("Authentication failed.")
+
+elif response.status_code == 404:
+
+    print(f"Unable to find user by the name of {user}.")
